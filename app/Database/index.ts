@@ -1,22 +1,25 @@
 import mongoose, { Promise } from 'mongoose';
 
-class Database{
-    private url: string
+class Database {
+    private url: string;
 
-    constructor(url: string){
-        this.url = url
+    public constructor(url: string) {
+        this.url = url;
     }
 
-    public connect(): Promise<any>{
-        return new Promise((resolve: any,rejetct: any)=>{
-            mongoose.connect(this.url).then(function(res: any){
-                return resolve(true);
-            }).catch((err: any)=>{
-                console.log(err);
-            })
+    public connect(): Promise<any> {
+        return new Promise((resolve: any, reject: any) => {
+            mongoose
+                .connect(this.url, { useNewUrlParser: true })
+                .then(function(res: any) {
+                    return resolve(true);
+                })
+                .catch((err: any) => {
+                    console.log(err);
+                });
         });
     }
-    public close(): any{
+    public close(): any {
         return mongoose.disconnect();
     }
 }

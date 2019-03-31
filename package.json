@@ -6,7 +6,7 @@
   "scripts": {
     "test": "npm run test",
     "tsc": "tsc",
-    "develop": "nodemon ./app/index.ts",
+    "develop": "cross-env NODE_ENV=development nodemon ./app/index.ts",
     "start": "tsc && node ./build/index.js"
   },
   "repository": {
