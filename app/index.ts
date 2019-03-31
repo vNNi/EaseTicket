@@ -3,7 +3,7 @@ import App from './Config/App';
 import customEnv from 'custom-env';
 customEnv.env(true);
 
-const url = `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@ds119085.mlab.com:19085/maapp`;
+const url = `mongodb://${process.env.DB_USER}:${process.env.DB_PASSWORD}@ds149329.mlab.com:49329/easeticket`;
 const db = new Database(url);
 
 db.connect()
