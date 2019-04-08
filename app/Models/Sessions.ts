@@ -9,7 +9,7 @@ interface Session extends mongoose.Document {
     openAt: Date;
     closeAt: Date;
     sessionLimit: number;
-    buyers: mongoose.Types.ObjectId[];
+    buyers: mongoose.Schema.Types.ObjectId[];
 }
 
 const sessionSchema: Schema = new Schema({
@@ -41,7 +41,7 @@ const sessionSchema: Schema = new Schema({
     },
     buyers: [
         {
-            type: mongoose.Types.ObjectId,
+            type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
         },
     ],
