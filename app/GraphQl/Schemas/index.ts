@@ -49,12 +49,17 @@ input userInput {
     cpf: String!
     createdAt: String!
 }
+input buyInput {
+    userId: ID!
+    sessionId: ID!
+}
 type RootQuery {
     verifyToken(tokenInput: tokenInput): Payload
 }
 type RootMutation {
     createSession(sessionInput: sessionInput): Session
     createUser(userInput: userInput): User
+    createBuy(buyInput: buyInput): Session
 }
 schema {
     query: RootQuery
