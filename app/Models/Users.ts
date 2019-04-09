@@ -1,12 +1,19 @@
 import mongoose, { Schema } from 'mongoose';
 
+interface User extends mongoose.Document {
+    name: string;
+    cpf: string;
+    createdAt: Date;
+    sessionWatched: mongoose.Schema.Types.ObjectId[];
+}
+
 const userSchema: Schema = new Schema({
     name: {
         type: String,
         required: true,
     },
     cpf: {
-        type: Number,
+        type: String,
         required: true,
     },
     createdAt: {
@@ -21,4 +28,4 @@ const userSchema: Schema = new Schema({
     ],
 });
 
-export default mongoose.model('User', userSchema);
+export default mongoose.model<User>('User', userSchema);
