@@ -23,6 +23,7 @@ const SessionResolver = {
                 throw new Error(err);
             });
     },
+    createBuy: args => {},
 };
 
 export default SessionResolver;
