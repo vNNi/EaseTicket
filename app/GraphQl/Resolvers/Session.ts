@@ -1,4 +1,5 @@
 import Session from '../../Models/Sessions';
+import mongoose, { Schema } from 'mongoose';
 
 const SessionResolver = {
     createSession: args => {
@@ -23,7 +24,25 @@ const SessionResolver = {
                 throw new Error(err);
             });
     },
-    createBuy: args => {},
+    createBuy: args => {
+        var sessionIdMock: any = '5cabe274239e694f28e9c953';
+        const userId = args.buyInput.userId;
+        const sessionId = args.buyInput.sessionId;
+        return Session.findById(sessionId)
+            .then(result => {
+                if (result) {
+                    if (result.buyers.length > result.sessionLimit) {
+                        throw new Error('This sessions is full');
+                    }
+                    result.buyers.push(userId);
+                    result.save();
+                    return result;
+                }
+            })
+            .catch(err => {
+                throw new Error(err);
+            });
+    },
 };
 
 export default SessionResolver;
