@@ -18,10 +18,17 @@ type Session {
     _id: ID!
     movie: Movie!
     price: Float!
-    openAt: String
-    closeAt: String
-    sessionLimit: Int
+    openAt: String!
+    closeAt: String!
+    sessionLimit: Int!
     buyers: [String]!
+}
+type User {
+    _id: ID!
+    name: String!
+    cpf: String!
+    createdAt: String!
+    sessionWatched: [ID]!
 }
 input movieInput{
     title: String!
@@ -37,11 +44,17 @@ input sessionInput {
 input tokenInput {
     token: String!
 }
+input userInput {
+    name: String!
+    cpf: String!
+    createdAt: String!
+}
 type RootQuery {
     verifyToken(tokenInput: tokenInput): Payload
 }
 type RootMutation {
     createSession(sessionInput: sessionInput): Session
+    createUser(userInput: userInput): User
 }
 schema {
     query: RootQuery
