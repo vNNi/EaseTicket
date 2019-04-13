@@ -1,6 +1,6 @@
 import Session from '../../Models/Sessions';
+import User from '../../Models/Users';
 import mongoose, { Schema } from 'mongoose';
-
 const SessionResolver = {
     createSession: args => {
         console.log(args);
@@ -35,9 +35,27 @@ const SessionResolver = {
                     if (result.buyers.length > result.sessionLimit) {
                         throw new Error('This sessions is full');
                     }
-                    result.buyers.push(userId);
-                    result.save();
-                    return result;
+                    return User.findById(userId)
+                        .then(user => {
+                            if (user) {
+                                if (result.buyers.some(i => i.id === user.id)) {
+                                    throw new Error('User already in session');
+                                } else {
+                                    user.sessionsWatched.push(sessionId);
+                                    result.buyers.push(user.id);
+                                    result.save();
+                                    user.save();
+                                    return result;
+                                }
+                            } else {
+                                throw new Error('User undefined');
+                            }
+                        })
+                        .catch(err => {
+                            throw new Error(err);
+                        });
+                } else {
+                    throw new Error('Session not found!');
                 }
             })
             .catch(err => {

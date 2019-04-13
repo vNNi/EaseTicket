@@ -4,7 +4,7 @@ interface User extends mongoose.Document {
     name: string;
     cpf: string;
     createdAt: Date;
-    sessionWatched: mongoose.Schema.Types.ObjectId[];
+    sessionsWatched: mongoose.Schema.Types.ObjectId[];
 }
 
 const userSchema: Schema = new Schema({

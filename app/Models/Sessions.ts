@@ -1,16 +1,5 @@
 import mongoose, { Schema, mongo } from 'mongoose';
-
-interface Session extends mongoose.Document {
-    movie: {
-        title: string;
-        description: string;
-    };
-    price: number;
-    openAt: Date;
-    closeAt: Date;
-    sessionLimit: number;
-    buyers: mongoose.Schema.Types.ObjectId[];
-}
+import ISession from '../Interfaces/Session';
 
 const sessionSchema: Schema = new Schema({
     movie: {
@@ -43,8 +32,9 @@ const sessionSchema: Schema = new Schema({
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
+            unique: true,
         },
     ],
 });
 
-export default mongoose.model<Session>('Session', sessionSchema);
+export default mongoose.model<ISession>('Session', sessionSchema);
