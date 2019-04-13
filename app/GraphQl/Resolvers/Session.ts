@@ -29,6 +29,7 @@ const SessionResolver = {
         const userId = args.buyInput.userId;
         const sessionId = args.buyInput.sessionId;
         return Session.findById(sessionId)
+            .populate('buyers')
             .then(result => {
                 if (result) {
                     if (result.buyers.length > result.sessionLimit) {

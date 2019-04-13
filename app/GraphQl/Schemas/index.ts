@@ -21,7 +21,7 @@ type Session {
     openAt: String!
     closeAt: String!
     sessionLimit: Int!
-    buyers: [String]!
+    buyers: [User]!
 }
 type User {
     _id: ID!
