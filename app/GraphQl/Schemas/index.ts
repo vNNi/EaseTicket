@@ -28,9 +28,16 @@ type User {
     name: String!
     cpf: String!
     createdAt: String!
-    sessionWatched: [ID]!
+    sessionsWatched: [ID]!
 }
-input movieInput{
+type NewUser {
+    _id: ID!
+    name: String!
+    cpf: String!
+    createdAt: String!
+}
+
+input movieInput {
     title: String!
     description: String
 }
@@ -53,12 +60,19 @@ input buyInput {
     userId: ID!
     sessionId: ID!
 }
+type Users{
+    users: [User]!
+}
+
+
 type RootQuery {
     verifyToken(tokenInput: tokenInput): Payload
+    getAllUsers: Users
+    getUser(userId: ID): User
 }
 type RootMutation {
     createSession(sessionInput: sessionInput): Session
-    createUser(userInput: userInput): User
+    createUser(userInput: userInput): NewUser
     createBuy(buyInput: buyInput): Session
 }
 schema {
